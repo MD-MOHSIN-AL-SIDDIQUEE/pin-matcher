@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input class="form-control" id="generateNumber" type="text">
+                    <button class="generate-btn" onclick="randomNumberGeneration()">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6"id="wholeSection">
+                <div class="input-section half-width">
+                    <input id="input-pin"class="form-control" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                              <div class="button" onclick="getNumber(7)">7</div>
+                              <div class="button"onclick="getNumber(8)">8</div>
+                              <div class="button"onclick="getNumber(9)">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button"onclick="getNumber(4)">4</div>
+                              <div class="button"onclick="getNumber(5)">5</div>
+                              <div class="button"onclick="getNumber(6)">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div class="button"onclick="getNumber(1)">1</div>
+                              <div class="button"onclick="getNumber(2)">2</div>
+                              <div class="button"onclick="getNumber(3)">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button"onclick="backspace()"><</div>
+                                <div class="button"onclick="getNumber(0)">0</div>
+                                <div class="button"onclick="clearNumber()">C</div>
+                            </div>
+                            <div>
+                                <button type="submit" class="submit-btn"onclick="submitButton()">Submit</button>
+                                <p id="action"class="action-left" > <span id="action1">4</span> try left</p>
+                               
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section" >
+            <div id="dontMatchPin"><p class="notify">❌ Pin Didn't Match, Please try again</p></div>
+            
+            <div id="MatchPin">
+                <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+            </div>
+        </div>
+    </div>
+    <script>
+    //4 digit random Number Generation
+    function randomNumberGeneration(){
+    randomNumber=Math.round(Math.random()*10000)
+    if(randomNumber<999){
+        randomNumber=randomNumber+1000;
+    }
+    if(randomNumber>999 && randomNumber<10000){
+        document.getElementById("generateNumber").value =randomNumber;
+    }
+    
+    return randomNumber;
+    }
+    //input pin section
+    function getNumber(num){
+        if(num==1){
+            input=document.getElementById("input-pin").value+=1;  
+        }
+        if(num==2){
+            input=document.getElementById("input-pin").value+=2;  
+        }
+        if(num==3){
+            input=document.getElementById("input-pin").value+=3;  
+        }
+        if(num==4){
+            input=document.getElementById("input-pin").value+=4;  
+        }
+        if(num==5){
+            input=document.getElementById("input-pin").value+=5;  
+        }
+        if(num==6){
+            input=document.getElementById("input-pin").value+=6;  
+        }
+        if(num==7){
+            input=document.getElementById("input-pin").value+=7;  
+        }
+        if(num==8){
+            input=document.getElementById("input-pin").value+=8;  
+        }
+        if(num==9){
+            input=document.getElementById("input-pin").value+=9;  
+        }
+        if(num==0){
+            input=document.getElementById("input-pin").value+=0;  
+        }
+
+    }
+    //clear button
+      function clearNumber(){
+        document.getElementById("input-pin").value="";
+      }
+
+     //backspace button
+    function backspace(){
+    var  x=document.getElementById("input-pin").value;
+    if(x.length>0){
+       x=x.slice(0,x.length-1);//remove the last number of the value
+       document.getElementById("input-pin").value=x
+       }
+    }
+   
+
+
+
+    //submit button section
+  
+  
+    function submitButton(){
+        inputNumber=document.getElementById("input-pin").value
+        generatenumber=document.getElementById("generateNumber").value
+        
+        if(inputNumber== generatenumber){   
+        document.getElementById("MatchPin").style.display="block";
+        document.getElementById("wholeSection").style.display="none";
+        document.getElementById("dontMatchPin").style.display="none";
+
+        }else{
+         document.getElementById("dontMatchPin").style.display="block";
+         document.getElementById("MatchPin").style.display="none";
+         document.getElementById("action").style.display="block";
+        
+         x=  document.getElementById("action1").innerText
+         
+         if(x>0){
+            x=x-1;
+            document.getElementById("action1").innerText=x;
+         }
+
+        }
+
+    }
+
+
+    </script>
+</body>
+</html>
