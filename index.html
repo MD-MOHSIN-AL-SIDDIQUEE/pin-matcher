@@ -43,8 +43,8 @@
                                 <div class="button"onclick="clearNumber()">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn"onclick="submitButton()">Submit</button>
-                                <p id="action"class="action-left" > <span id="action1">4</span> try left</p>
+                                <button type="submit" class="submit-btn"id="submit"onclick="submitButton()">Submit</button>
+                                <p id="action"class="action-left" > <span id="action1">3</span> try left</p>
                                
                             </div>
                     </div>
@@ -62,90 +62,88 @@
     <script>
     //4 digit random Number Generation
     function randomNumberGeneration(){
-    randomNumber=Math.round(Math.random()*10000)
+        randomNumber = Math.round(Math.random()*10000)
     if(randomNumber<999){
-        randomNumber=randomNumber+1000;
+        randomNumber = randomNumber+1000;
     }
-    if(randomNumber>999 && randomNumber<10000){
-        document.getElementById("generateNumber").value =randomNumber;
+    if(randomNumber > 999 && randomNumber < 10000){
+        document.getElementById("generateNumber").value = randomNumber;
     }
     
     return randomNumber;
     }
     //input pin section
     function getNumber(num){
-        if(num==1){
-            input=document.getElementById("input-pin").value+=1;  
+        if(num == 1){
+            input = document.getElementById("input-pin").value += 1;  
         }
-        if(num==2){
-            input=document.getElementById("input-pin").value+=2;  
+        if(num == 2){
+            input = document.getElementById("input-pin").value += 2;  
         }
-        if(num==3){
-            input=document.getElementById("input-pin").value+=3;  
+        if(num == 3){
+            input = document.getElementById("input-pin").value += 3;  
         }
-        if(num==4){
-            input=document.getElementById("input-pin").value+=4;  
+        if(num == 4){
+            input=document.getElementById("input-pin").value += 4;  
         }
-        if(num==5){
-            input=document.getElementById("input-pin").value+=5;  
+        if(num == 5){
+            input = document.getElementById("input-pin").value += 5;  
         }
-        if(num==6){
-            input=document.getElementById("input-pin").value+=6;  
+        if(num == 6){
+            input = document.getElementById("input-pin").value += 6;  
         }
-        if(num==7){
-            input=document.getElementById("input-pin").value+=7;  
+        if(num == 7){
+            input = document.getElementById("input-pin").value += 7;  
         }
-        if(num==8){
-            input=document.getElementById("input-pin").value+=8;  
+        if(num == 8){
+            input = document.getElementById("input-pin").value += 8;  
         }
-        if(num==9){
-            input=document.getElementById("input-pin").value+=9;  
+        if(num == 9){
+            input = document.getElementById("input-pin").value += 9;  
         }
-        if(num==0){
-            input=document.getElementById("input-pin").value+=0;  
+        if(num == 0){
+            input = document.getElementById("input-pin").value += 0;  
         }
 
     }
     //clear button
       function clearNumber(){
-        document.getElementById("input-pin").value="";
+        document.getElementById("input-pin").value = "";
       }
 
      //backspace button
     function backspace(){
-    var  x=document.getElementById("input-pin").value;
-    if(x.length>0){
-       x=x.slice(0,x.length-1);//remove the last number of the value
-       document.getElementById("input-pin").value=x
+    var  x = document.getElementById("input-pin").value;
+    if(x.length > 0){
+       x = x.slice(0,x.length - 1);//remove the last number of the value
+       document.getElementById("input-pin").value = x
        }
     }
    
-
-
-
     //submit button section
   
-  
     function submitButton(){
-        inputNumber=document.getElementById("input-pin").value
-        generatenumber=document.getElementById("generateNumber").value
-        
-        if(inputNumber== generatenumber){   
-        document.getElementById("MatchPin").style.display="block";
-        document.getElementById("wholeSection").style.display="none";
-        document.getElementById("dontMatchPin").style.display="none";
+            inputNumber = document.getElementById("input-pin").value
+            generatenumber = document.getElementById("generateNumber").value
+            
+            if(inputNumber == generatenumber){   
+            document.getElementById("MatchPin").style.display = "block";
+            document.getElementById("wholeSection").style.display = "none";
+            document.getElementById("dontMatchPin").style.display = "none";
 
         }else{
-         document.getElementById("dontMatchPin").style.display="block";
-         document.getElementById("MatchPin").style.display="none";
-         document.getElementById("action").style.display="block";
-        
-         x=  document.getElementById("action1").innerText
-         
-         if(x>0){
-            x=x-1;
-            document.getElementById("action1").innerText=x;
-         }
+            document.getElementById("dontMatchPin").style.display = "block";
+            document.getElementById("MatchPin").style.display = "none";
+            document.getElementById("action").style.display = "block";
+            
+            //action after 3 try
+            x =  document.getElementById("action1").innerText;
+            if(x>0){
+                x = x - 1;
+                document.getElementById("action1").innerText = x;
+            }else{
+                 document.getElementById("submit").style.display = "none"; 
+            }
 
         }
 
